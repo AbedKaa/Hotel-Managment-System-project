@@ -41,81 +41,29 @@ void get_password(char*);
 void issuerecord();
 void creditNclose();
 void adminsignup();
-
-
-int main() {
-	Login = fopen("password.dat", "rb");
-	if (Login == NULL)
-	{
-		gotoxy(10, 9);
-		cout << "Database Do not existe. Be an adminstrator. Sign Up";
-		adminsignup();
-	}
-	else
-	{
-		adminsignin();
-	}
-	mainmenu();
-	return 0;
+void gotoxy(int x, int y) {
+	coord.X = x; coord.Y = y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
-//main menu functions!!!
-void mainmenu()
-{
-	while (1)
-	{
-		system("cls");
-		gotoxy(20, 3);
-		cout << "\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 MAIN MENU \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2";
-		gotoxy(20, 5);
-		cout << "\xDB\xDB\xDB\xDB\xB2 1. Add Books   ";
-		gotoxy(20, 7);
-		cout << "\xDB\xDB\xDB\xDB\xB2 2. Delete Book";
-		gotoxy(20, 9);
-		cout << "\xDB\xDB\xDB\xDB\xB2 3. Search Book";
-		gotoxy(20, 11);
-		cout << "\xDB\xDB\xDB\xDB\xB2 4. View Book List";
-		gotoxy(20, 13);
-		cout << "\xDB\xDB\xDB\xDB\xB2 5. Edit Book Record ";
-		gotoxy(20, 15);
-		cout << "\xDB\xDB\xDB\xDB\xB2 6. Change Password";
-		gotoxy(20, 17);
-		cout << "\xDB\xDB\xDB\xDB\xB2 7. Close Application";
-		gotoxy(20, 19);
-		cout << "\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2";
-		gotoxy(20, 21);
-		cout << "Enter your choice:";
-		switch (getch())
-		{
-		case '1':
-			addbooks();
-			break;
-		case '2':
-			deletebooks();
-			break;
-		case '3':
-			searchbooks();
-			break;
-		case '4':
-			viewbooks();
-			break;
-		case '5':
-			editbooks();
-			break;
-		case '6':
-			change_password();
-			gotoxy(10, 13);
-			cout << "press any key to continue....";
-			getch();
-			break;
-		case '7' :
-			creditNclose();
-		default:
-			gotoxy(10, 23);
-			cout << "\aWrong Entry!!Please re-entered correct option";
-			getch();
-		}
-
-	}
+void add_window() {
+	gotoxy(20, 5);
+	cout << "\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2SELECT CATEGORIES\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2";
+	gotoxy(20, 7);
+	cout << "\xDB\xDB\xDB\xDB\xB2 01 . Computer";
+	gotoxy(20, 9);
+	cout << "\xDB\xDB\xDB\xDB\xB2 02 . Electronics";
+	gotoxy(20, 11);
+	cout << "\xDB\xDB\xDB\xDB\xB2 03 . Electrical";
+	gotoxy(20, 13);
+	cout << "\xDB\xDB\xDB\xDB\xB2 04 . Civil";
+	gotoxy(20, 15);
+	cout << "\xDB\xDB\xDB\xDB\xB2 05 . Mechanical";
+	gotoxy(20, 17);
+	cout << "\xDB\xDB\xDB\xDB\xB2 06 . architecture";
+	gotoxy(20, 19);
+	cout << "\xDB\xDB\xDB\xDB\xB2 07 . Back to main menu";
+	gotoxy(20, 21);
+	cout << "\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2";
 }
 void addbooks(void) {
 	system("cls");
@@ -211,29 +159,7 @@ void deletebooks()
 	}
 }
 
-void searchbooks()
-{
-	system("cls");
-	cout << "*****************************Search Books*********************************";
-	gotoxy(20, 10);
-	cout << "\xDB\xDB\xDB\xB2 1. Search By ID";
-	gotoxy(20, 14);
-	cout << "\xDB\xDB\xDB\xB2 2. Search By Name";
-	gotoxy(15, 20);
-	cout << "Enter Your Choice";
-	switch (getch())
-	{
-	case '1':
-		searchByID();
-		break;
-	case '2':
-		searchByName();
-		break;
-	default:
-		getch();
-		searchbooks();
-	}
-}
+
 
 void viewbooks(void)
 {
@@ -329,10 +255,7 @@ void editbooks(void)
 	returnfunc();
 }
 //functions!!!
-void gotoxy(int x, int y) {
-	coord.X = x; coord.Y = y;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
+
 
 void returnfunc() {
 	cout << "\nPress Enter to return to main menu";
@@ -389,12 +312,7 @@ void creditNclose() {
 	exit(0);
 }
 
-int t(void)
-{
-	time_t t;
-	time(&t);
-	cout << "Data and time:%s/n", ctime(&t);
-}
+
 
 void adminsignup()
 {
@@ -406,14 +324,14 @@ void adminsignup()
 	gotoxy(10, 11);
 	cout << "Re Enter Password: ";
 	get_password(temp);
-	while (strcmp(password,temp)!=0)
+	while (strcmp(password, temp) != 0)
 	{
 		gotoxy(10, 10);
 		cout << "Password did not matched! Enter again";
 		gotoxy(10, 11);
 		cout << "Enter password: ";
 		get_password(password);
-		gotoxy(11 , 12);
+		gotoxy(11, 12);
 		cout << "Re Enter Password: ";
 		get_password(temp);
 		system("cls");
@@ -428,7 +346,7 @@ void adminsignin() {
 	gotoxy(10, 10);
 	cout << "Enter password: ";
 	get_password(temp);
-	while (fread(&password,sizeof(password),1,Login)==1)
+	while (fread(&password, sizeof(password), 1, Login) == 1)
 	{
 		while (strcmp(temp, password) != 0)
 		{
@@ -448,26 +366,7 @@ void adminsignin() {
 	getch();
 }
 
-void add_window() {
-	gotoxy(20, 5);
-	cout << "\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2SELECT CATEGORIES\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2";
-	gotoxy(20, 7);
-	cout << "\xDB\xDB\xDB\xDB\xB2 01 . Computer";
-	gotoxy(20, 9);
-	cout << "\xDB\xDB\xDB\xDB\xB2 02 . Electronics";
-	gotoxy(20, 11);
-	cout << "\xDB\xDB\xDB\xDB\xB2 03 . Electrical";
-	gotoxy(20, 13);
-	cout << "\xDB\xDB\xDB\xDB\xB2 04 . Civil";
-	gotoxy(20, 15);
-	cout << "\xDB\xDB\xDB\xDB\xB2 05 . Mechanical";
-	gotoxy(20, 17);
-	cout << "\xDB\xDB\xDB\xDB\xB2 06 . architecture";
-	gotoxy(20, 19);
-	cout << "\xDB\xDB\xDB\xDB\xB2 07 . Back to main menu";
-	gotoxy(20, 21);
-	cout << "\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2";
-}
+
 
 int change_password() {
 	system("cls");
@@ -480,7 +379,7 @@ int change_password() {
 	cout << "Enter New Password: ";
 	get_password(new_pass);
 	Login = fopen("password.dat", "rb+");
-	while (fread(&password,sizeof(password),1,Login)==1)
+	while (fread(&password, sizeof(password), 1, Login) == 1)
 	{
 		if (strcmp(old_pass, password) == 0)
 		{
@@ -501,7 +400,7 @@ int change_password() {
 	}
 }
 
-int getdata(int choice) 
+int getdata(int choice)
 {
 	int bookID;
 	gotoxy(20, 3);
@@ -528,7 +427,7 @@ int getdata(int choice)
 	cout << "\xB2";
 	gotoxy(46, 9);
 	cout << "\xB2";
-	gotoxy(20,10);
+	gotoxy(20, 10);
 	cout << "\xB2";
 	gotoxy(46, 10);
 	cout << "\xB2";
@@ -541,22 +440,22 @@ int getdata(int choice)
 	gotoxy(21, 5);
 	cout << "Category";
 	gotoxy(31, 5);
-	cout << "%s", categories[choice - 1];
+	cout <<categories[choice - 1];
 	gotoxy(21, 6);
-	cout << "Bood ID: ";
+	cout << "Book ID: ";
 	gotoxy(30, 6);
 	scanf("%d", bookID);
 	if (checkid(bookID) == 0)
 	{
 		gotoxy(21, 13);
-		cout << "The bookd id already exists";
+		cout << "The book id already exists";
 		getch();
 		addbooks;
 		return 0;
 	}
 	book.id = bookID;
 	gotoxy(21, 7);
-	cout << "Book Nane:";
+	cout << "Book Name:";
 	gotoxy(33, 7);
 	scanf("%s", book.name);
 	gotoxy(21, 8);
@@ -575,7 +474,6 @@ int getdata(int choice)
 	cout << "Rack No:";
 	gotoxy(30, 11);
 	scanf("%d", book.rackno);
-	return 1;
 }
 
 int checkid(int t)
@@ -740,3 +638,101 @@ void searchByName()
 		mainmenu();
 	}
 }
+	void searchbooks()
+{
+	system("cls");
+	cout << "*****************************Search Books*********************************";
+	gotoxy(20, 10);
+	cout << "\xDB\xDB\xDB\xB2 1. Search By ID";
+	gotoxy(20, 14);
+	cout << "\xDB\xDB\xDB\xB2 2. Search By Name";
+	gotoxy(15, 20);
+	cout << "Enter Your Choice";
+	switch (getch())
+	{
+	case '1':
+		searchByID();
+		break;
+	case '2':
+		searchByName();
+		break;
+	default:
+		getch();
+		searchbooks();
+	}
+}
+void mainmenu()
+{
+	while (1)
+	{
+		system("cls");
+		gotoxy(20, 3);
+		cout << "\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 MAIN MENU \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2";
+		gotoxy(20, 5);
+		cout << "\xDB\xDB\xDB\xDB\xB2 1. Add Books   ";
+		gotoxy(20, 7);
+		cout << "\xDB\xDB\xDB\xDB\xB2 2. Delete Book";
+		gotoxy(20, 9);
+		cout << "\xDB\xDB\xDB\xDB\xB2 3. Search Book";
+		gotoxy(20, 11);
+		cout << "\xDB\xDB\xDB\xDB\xB2 4. View Book List";
+		gotoxy(20, 13);
+		cout << "\xDB\xDB\xDB\xDB\xB2 5. Edit Book Record ";
+		gotoxy(20, 15);
+		cout << "\xDB\xDB\xDB\xDB\xB2 6. Change Password";
+		gotoxy(20, 17);
+		cout << "\xDB\xDB\xDB\xDB\xB2 7. Close Application";
+		gotoxy(20, 19);
+		cout << "\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2";
+		gotoxy(20, 21);
+		cout << "Enter your choice:";
+		switch (getch())
+		{
+		case '1':
+			addbooks();
+			break;
+		case '2':
+			deletebooks();
+			break;
+		case '3':
+			searchbooks();
+			break;
+		case '4':
+			viewbooks();
+			break;
+		case '5':
+			editbooks();
+			break;
+		case '6':
+			change_password();
+			gotoxy(10, 13);
+			cout << "press any key to continue....";
+			getch();
+			break;
+		case '7':
+			creditNclose();
+		default:
+			gotoxy(10, 23);
+			cout << "\aWrong Entry!!Please re-entered correct option";
+			getch();
+		}
+
+	}
+}
+
+int main() {
+	Login = fopen("password.dat", "rb");
+	if (Login == NULL)
+	{
+		gotoxy(10, 9);
+		cout << "Database Do not existe. Be an adminstrator. Sign Up";
+		adminsignup();
+	}
+	else
+	{
+		adminsignin();
+	}
+	mainmenu();
+	return 0;
+}
+//main menu functions!!!
